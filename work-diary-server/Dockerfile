@@ -3,6 +3,9 @@ FROM maven:3.9-eclipse-temurin-17 AS builder
 
 WORKDIR /build
 
+# 注入阿里云 Maven 镜像，解决国内服务器拉依赖慢的问题
+COPY maven-settings.xml /root/.m2/settings.xml
+
 # 先只拷贝 pom.xml，利用 Docker 层缓存预下载依赖（代码变化时无需重新下载）
 COPY pom.xml .
 RUN mvn dependency:go-offline -q
