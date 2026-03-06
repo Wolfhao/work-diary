@@ -1,0 +1,56 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_HOST:mysql}:${DB_PORT:3306}/${DB_NAME:work_diary}?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+    username: ${DB_USER:root}
+    password: ${DB_PASS}
+
+  data:
+    redis:
+      host: ${REDIS_HOST:redis}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASS}
+      database: 0
+      lettuce:
+        pool:
+          max-active: 16
+          max-wait: 2000ms
+          max-idle: 8
+          min-idle: 2
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 50MB
+
+server:
+  port: 8080
+
+work-diary:
+  storage:
+    type: cos
+    local:
+      path: /data/upload/
+      domain: ${LOCAL_UPLOAD_DOMAIN:http://localhost:8080}
+      prefix: /files
+    cos:
+      region-id: ${COS_REGION:ap-shanghai}
+      secret-id: ${COS_SECRET_ID}
+      secret-key: ${COS_SECRET_KEY}
+      bucket-name: ${COS_BUCKET}
+      domain: ${COS_DOMAIN:}
+
+wx:
+  miniapp:
+    appid: ${WX_APPID}
+    secret: ${WX_SECRET}
+    token: ${WX_TOKEN:}
+    aesKey: ${WX_AESKEY:}
+    msgDataFormat: JSON
+
+sa-token:
+  token-name: workDiaryAuthorization
+  timeout: 2592000
+  is-concurrent: false
+  is-share: false
+  token-style: uuid
