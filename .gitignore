@@ -1,1 +1,6 @@
 .idea/
+*/application-dev.yml
+# Docker 环境变量（含密钥，禁止提交）
+.env
+# SSL 证书（禁止提交）
+doc/nginx/ssl/
