@@ -2,12 +2,12 @@ version: '3.8'
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Work Diary - Docker Compose
-# 包含完整的 MySQL, Redis, 后端服务和 Nginx 代理
+# 适配 2核2GB 服务器 | 轻量场景（几人使用）| 资源限制优化
 # ─────────────────────────────────────────────────────────────────────────────
 
 services:
 
-  # ── 后端应用 ────────────────────────────────────────────────────────────────
+  # ── 后端应用（核心业务，分配 768M 内存）───────────────────────────────────────
   work-diary-server:
     build:
       context: ./work-diary-server
@@ -19,7 +19,9 @@ services:
       - "8080:8080"
     environment:
       SPRING_PROFILES_ACTIVE: prod
-      # 数据库（连接到容器内的 mysql 服务）
+      # JVM 内存优化（核心！适配 2GB 服务器）
+      JAVA_OPTS: "-Xms512m -Xmx768m -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError"
+      # 数据库配置
       DB_HOST: mysql
       DB_PORT: 3306
       DB_NAME: ${DB_NAME:-work_diary}
@@ -46,10 +48,19 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+    # 资源限制（核心配置）
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'    # 最多占用 1 核 CPU
+          memory: 768M   # 最大内存 768M
+        reservations:
+          cpus: '0.5'    # 保底分配 0.5 核 CPU
+          memory: 512M   # 保底内存 512M
     networks:
       - work-diary-net
 
-  # ── MySQL 5.7 ───────────────────────────────────────────────────────────────
+  # ── MySQL 5.7（分配 512M 内存）──────────────────────────────────────────────
   mysql:
     image: mysql:5.7
     container_name: work-diary-mysql
@@ -58,26 +69,41 @@ services:
       MYSQL_ROOT_PASSWORD: ${DB_PASS}
       MYSQL_DATABASE: ${DB_NAME:-work_diary}
       MYSQL_CHARSET: utf8mb4
+      # MySQL 内存优化
+      MYSQL_INITDB_SKIP_TZINFO: "1"
     volumes:
       - mysql_data:/var/lib/mysql
       - ./doc/sql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      # 自定义 MySQL 配置（优化内存使用，需新建该文件）
+      - ./doc/mysql/my.cnf:/etc/mysql/conf.d/custom.cnf:ro
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_PASS}"]
       interval: 10s
       timeout: 5s
       retries: 5
+    # 资源限制
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.2'
+          memory: 256M
     networks:
       - work-diary-net
 
-  # ── Redis 7 ─────────────────────────────────────────────────────────────────
+  # ── Redis（分配 256M 内存）──────────────────────────────────────────────────
   redis:
-    image: redis:7-alpine
+    image: alinux3/redis_optimized
     container_name: work-diary-redis
     restart: unless-stopped
     command: >
       redis-server
       --requirepass ${REDIS_PASS}
       --appendonly yes
+      --maxmemory 128M  # 限制 Redis 最大内存 128MB
+      --maxmemory-policy allkeys-lru  # 内存满时淘汰策略
     volumes:
       - redis_data:/data
     healthcheck:
@@ -85,10 +111,19 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    # 资源限制
+    deploy:
+      resources:
+        limits:
+          cpus: '0.3'
+          memory: 256M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
     networks:
       - work-diary-net
 
-  # ── Nginx（反向代理 + HTTPS）────────────────────────────────────────────────
+  # ── Nginx（反向代理 + HTTPS，仅分配 128M 内存）───────────────────────────────
   nginx:
     image: nginx:alpine
     container_name: work-diary-nginx
@@ -102,6 +137,15 @@ services:
       - upload_data:/data/upload:ro              # 挂载上传目录（COS 模式可不挂）
     depends_on:
       - work-diary-server
+    # 资源限制
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 128M
+        reservations:
+          cpus: '0.1'
+          memory: 64M
     networks:
       - work-diary-net
 
