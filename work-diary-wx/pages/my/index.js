@@ -1,87 +1,69 @@
-import request from '~/api/request';
-import useToastBehavior from '~/behaviors/useToast';
+import { post, doLogin } from '../../api/request';
+import Toast from 'tdesign-miniprogram/toast/index';
 
 Page({
-  behaviors: [useToastBehavior],
+    data: {
+        hasLoggedIn: false, // 是否已经登录
+        userInfo: {
+            avatarUrl: 'https://tdesign.gtimg.com/miniprogram/images/avatar1.png', // 默认头像
+            nickName: '微信用户',
+        },
+    },
 
-  data: {
-    isLoad: false,
-    service: [],
-    personalInfo: {},
-    gridList: [
-      {
-        name: '全部发布',
-        icon: 'root-list',
-        type: 'all',
-        url: '',
-      },
-      {
-        name: '审核中',
-        icon: 'search',
-        type: 'progress',
-        url: '',
-      },
-      {
-        name: '已发布',
-        icon: 'upload',
-        type: 'published',
-        url: '',
-      },
-      {
-        name: '草稿箱',
-        icon: 'file-copy',
-        type: 'draft',
-        url: '',
-      },
-    ],
+    onLoad() {
+        this.checkLoginStatus();
+    },
 
-    settingList: [
-      { name: '联系客服', icon: 'service', type: 'service' },
-      { name: '设置', icon: 'setting', type: 'setting', url: '/pages/setting/index' },
-    ],
-  },
+    onShow() {
+        this.checkLoginStatus();
+        if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+            this.getTabBar().init();
+        }
+    },
 
-  onLoad() {
-    this.getServiceList();
-  },
+    // 检查本地 Token 是否存在
+    checkLoginStatus() {
+        const token = wx.getStorageSync('Authorization');
+        if (token) {
+            this.setData({ hasLoggedIn: true });
+        } else {
+            this.setData({ hasLoggedIn: false });
+            // 无感自动登录
+            doLogin().then(() => {
+                this.setData({ hasLoggedIn: true });
+                Toast({ context: this, selector: '#t-toast', message: '已自动登录', theme: 'success' });
+            }).catch(() => {
+                Toast({ context: this, selector: '#t-toast', message: '自动登录失败', theme: 'error' });
+            });
+        }
+    },
 
-  async onShow() {
-    const Token = wx.getStorageSync('access_token');
-    const personalInfo = await this.getPersonalInfo();
+    // 点击登录按钮 (保留作为手动重试入口)
+    onLogin() {
+        this.checkLoginStatus();
+    },
 
-    if (Token) {
-      this.setData({
-        isLoad: true,
-        personalInfo,
-      });
+    // 退出登录
+    onLogout() {
+        wx.showModal({
+            title: '提示',
+            content: '确定要退出登录吗？',
+            success: (res) => {
+                if (res.confirm) {
+                    wx.showLoading({ title: '退出中...' });
+                    post('/wx/logout').then(() => {
+                        wx.removeStorageSync('Authorization');
+                        this.setData({ hasLoggedIn: false });
+                        Toast({ context: this, selector: '#t-toast', message: '已退出登录' });
+                    }).finally(() => {
+                        wx.hideLoading();
+                    });
+
+                    // 兜底清理（防止后端网络异常导致前端卡在登录态）
+                    wx.removeStorageSync('Authorization');
+                    this.setData({ hasLoggedIn: false });
+                }
+            }
+        });
     }
-  },
-
-  getServiceList() {
-    request('/api/getServiceList').then((res) => {
-      const { service } = res.data.data;
-      this.setData({ service });
-    });
-  },
-
-  async getPersonalInfo() {
-    const info = await request('/api/genPersonalInfo').then((res) => res.data.data);
-    return info;
-  },
-
-  onLogin(e) {
-    wx.navigateTo({
-      url: '/pages/login/login',
-    });
-  },
-
-  onNavigateTo() {
-    wx.navigateTo({ url: `/pages/my/info-edit/index` });
-  },
-
-  onEleClick(e) {
-    const { name, url } = e.currentTarget.dataset.data;
-    if (url) return;
-    this.onShowToast('#t-toast', name);
-  },
 });

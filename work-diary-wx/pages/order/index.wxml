@@ -1,0 +1,26 @@
+<view class="order-container">
+  <!-- 顶部搜索框 -->
+  <view class="search-wrap">
+    <t-search placeholder="搜索商单" value="{{searchValue}}" bind:change="onSearchChange" bind:clear="onSearchChange" bind:submit="onSearchChange" shape="round" clearable></t-search>
+  </view>
+
+  <!-- 选项卡切换 (全部 / 制作中 / 待结款) -->
+  <t-tabs defaultValue="0" bind:change="onTabsChange" t-class="custom-tabs" t-class-content="custom-panel" theme="tag">
+    <t-tab-panel label="全部" value="0">
+      <order-list orderList="{{listData[0]}}" loading="{{loading}}" hasMore="{{hasMore[0]}}" bind:action="onOrderAction" />
+    </t-tab-panel>
+    <t-tab-panel label="制作中" value="1">
+      <order-list orderList="{{listData[1]}}" loading="{{loading}}" hasMore="{{hasMore[1]}}" bind:action="onOrderAction" />
+    </t-tab-panel>
+    <t-tab-panel label="待结款" value="2">
+      <order-list orderList="{{listData[2]}}" loading="{{loading}}" hasMore="{{hasMore[2]}}" bind:action="onOrderAction" />
+    </t-tab-panel>
+  </t-tabs>
+
+  <view class="fab-button" bindtap="onAddTap">
+    <text class="fab-icon">+</text>
+    <text class="fab-text">FAB</text>
+  </view>
+
+  <t-toast id="t-toast" />
+</view>

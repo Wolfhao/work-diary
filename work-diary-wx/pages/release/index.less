@@ -1,60 +1,134 @@
-/* pages/release/index.wxss */
-.release-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0;
-  box-sizing: border-box;
+@import '/variable.less';
 
-  .box {
-    width: 100%;
+@bg-gradient: linear-gradient(170deg, #fff5f8 0%, #f0eeff 50%, #e8f8ff 100%);
+@card-shadow: 0 8rpx 36rpx rgba(120, 90, 200, 0.10);
+@purple: #7752c2;
+@purple-light: rgba(195, 168, 240, 0.18);
+@text-primary: #3a2f5f;
+@text-muted: #c0b0d8;
+
+.release-page {
+  min-height: 100vh;
+  background: @bg-gradient;
+  padding: 100rpx 32rpx 60rpx;
+  box-sizing: border-box;
+}
+
+/* ===== 页面标题 ===== */
+.page-header {
+  margin-bottom: 32rpx;
+  padding: 0 4rpx;
+
+  .page-title {
+    display: block;
+    font-size: 44rpx;
+    font-weight: 800;
+    color: @text-primary;
+    margin-bottom: 8rpx;
+    letter-spacing: 2rpx;
   }
-  .upload {
-    height: 112rpx * 2;
-    position: relative;
-    &-class {
-      width: 344rpx * 2;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
+
+  .page-subtitle {
+    display: block;
+    font-size: 26rpx;
+    color: @text-muted;
   }
-  .desc {
-    height: 132rpx * 2;
-    display: flex;
-    padding: 32rpx;
-    align-items: flex-start;
-    justify-content: space-between;
-    box-sizing: border-box;
-    .desc-class {
-      width: 246rpx * 2;
-      height: 100%;
-      padding: 0;
-    }
+}
+
+/* ===== 表单卡片 ===== */
+.form-card {
+  background: #fff;
+  border-radius: 28rpx;
+  padding: 28rpx 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: @card-shadow;
+  border: 2rpx solid rgba(200, 180, 255, 0.18);
+}
+
+.section-label {
+  font-size: 22rpx;
+  font-weight: 700;
+  color: @text-muted;
+  text-transform: uppercase;
+  letter-spacing: 3rpx;
+  margin-bottom: 20rpx;
+}
+
+/* ===== 表单项 ===== */
+.form-item {
+  display: flex;
+  align-items: center;
+  min-height: 88rpx;
+  padding: 4rpx 0;
+
+  .form-label {
+    font-size: 28rpx;
+    font-weight: 600;
+    color: @text-primary;
+    width: 160rpx;
+    flex-shrink: 0;
   }
-  .taggroup {
-    .cell-title-class {
-      width: 81rpx * 2;
-    }
-    .cell-note-class {
-      overflow-x: auto;
-      justify-content: start;
-    }
-    .tag-class {
-      margin-left: 24rpx;
-    }
+
+  .input-class {
+    flex: 1;
+    text-align: right;
+    font-size: 28rpx;
+    color: @text-primary;
   }
-  .btngroup {
-    display: flex;
-    justify-content: space-evenly;
-    padding: 32rpx;
-    position: fixed;
-    bottom: 64rpx;
-    .btn-class {
-      width: 163.5rpx * 2;
-      margin: 0;
-    }
+}
+
+.switch-item {
+  .form-label {
+    font-size: 28rpx;
+    color: @text-primary;
   }
+
+  t-switch {
+    margin-left: auto;
+  }
+}
+
+.form-right {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+
+  .form-value {
+    font-size: 28rpx;
+    color: @purple;
+    font-weight: 500;
+    margin-right: 8rpx;
+  }
+
+  .form-arrow {
+    font-size: 36rpx;
+    color: @text-muted;
+    line-height: 1;
+  }
+}
+
+.form-divider {
+  height: 2rpx;
+  background: @purple-light;
+  margin: 4rpx -8rpx;
+}
+
+/* ===== 文本域 ===== */
+.textarea-class {
+  width: 100%;
+  min-height: 180rpx;
+  font-size: 28rpx;
+  color: @text-primary;
+}
+
+/* ===== 操作区 ===== */
+.action-area {
+  margin-top: 8rpx;
+  padding-bottom: 40rpx;
+
+  // 覆盖蓝色主题按钮为紫色
+  --td-button-primary-color: #fff;
+  --td-button-primary-bg-color: @purple;
+  --td-button-primary-border-color: @purple;
+  --td-button-large-border-radius: 100rpx;
 }

@@ -1,0 +1,246 @@
+.list-container {
+  padding-bottom: 48rpx;
+}
+
+/* ===== 卡片主体 ===== */
+.order-card {
+  background: #fff;
+  border-radius: 28rpx;
+  padding: 32rpx 32rpx 24rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 8rpx 36rpx rgba(120, 90, 200, 0.10);
+  border: 2rpx solid rgba(200, 180, 255, 0.18);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 卡片左上角装饰条 */
+.order-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6rpx;
+  background: linear-gradient(to bottom, #c3a8f0, #845ec2);
+  border-radius: 28rpx 0 0 28rpx;
+}
+
+/* ===== 卡片头部 ===== */
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.brand-avatar {
+  width: 76rpx;
+  height: 76rpx;
+  border-radius: 20rpx;
+  background: linear-gradient(135deg, #ddd0f8, #c3a8f0);
+  color: #6a4daa;
+  font-weight: 800;
+  font-size: 34rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+  box-shadow: 0 4rpx 12rpx rgba(120, 90, 200, 0.20);
+}
+
+.card-meta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #3a2f5f;
+  margin-bottom: 6rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.subtitle {
+  font-size: 22rpx;
+  color: #c0b0d8;
+}
+
+/* 状态标签 */
+.status-tag {
+  padding: 5rpx 18rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-left: 12rpx;
+}
+
+.status-tag.success {
+  background: linear-gradient(135deg, #d4f5e9, #b8ecd8);
+  color: #2b9d5c;
+}
+
+.status-tag.warning {
+  background: linear-gradient(135deg, #fff0d4, #ffe0a0);
+  color: #d48a00;
+}
+
+.status-tag.primary {
+  background: linear-gradient(135deg, #efe8ff, #ddd0f8);
+  color: #7752c2;
+}
+
+.status-tag.cancel {
+  background: #f5f5f5;
+  color: #bbb;
+}
+
+/* ===== 收入行 ===== */
+.income-row {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 20rpx;
+  padding: 0 6rpx;
+}
+
+.income-label {
+  font-size: 24rpx;
+  color: #c0b0d8;
+  margin-right: 12rpx;
+}
+
+.income-amount {
+  font-size: 44rpx;
+  font-weight: 800;
+  font-family: 'DIN Alternate', 'Inter', sans-serif;
+  color: #7752c2;
+  letter-spacing: -1rpx;
+}
+
+/* ===== 步骤进度条 ===== */
+.progress-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
+  padding: 0 4rpx;
+}
+
+.progress-step {
+  font-size: 20rpx;
+  color: #d0c4e8;
+  white-space: nowrap;
+  transition: color 0.3s;
+}
+
+.progress-step.active {
+  color: #9b76db;
+  font-weight: 600;
+}
+
+.progress-step.done {
+  color: #2b9d5c;
+}
+
+.progress-line-seg {
+  flex: 1;
+  height: 4rpx;
+  background: #ede8ff;
+  border-radius: 2rpx;
+  margin: 0 8rpx;
+  transition: background 0.3s;
+}
+
+.progress-line-seg.filled {
+  background: linear-gradient(to right, #c3a8f0, #845ec2);
+}
+
+/* ===== 底部 Chip 标签 ===== */
+.card-footer {
+  display: flex;
+  gap: 16rpx;
+}
+
+.chip {
+  font-size: 22rpx;
+  padding: 6rpx 18rpx;
+  border-radius: 20rpx;
+  font-weight: 500;
+}
+
+.chip-ok {
+  background: #e8f7f0;
+  color: #2b9d5c;
+}
+
+.chip-pending {
+  background: #f5f0ff;
+  color: #c0a0e0;
+}
+
+/* ===== 操作按钮区 ===== */
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20rpx;
+  border-top: 2rpx dashed rgba(200, 180, 255, 0.35);
+  padding-top: 20rpx;
+  gap: 16rpx;
+}
+
+.action-btn {
+  padding: 10rpx 28rpx;
+  border-radius: 32rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+  text-align: center;
+}
+
+.action-btn.primary {
+  background: linear-gradient(135deg, #efe8ff, #ddd0f8);
+  color: #7752c2;
+}
+
+.action-btn.secondary {
+  background: linear-gradient(135deg, #fff4e5, #ffe8c0);
+  color: #d48a00;
+}
+
+.action-btn.success {
+  background: linear-gradient(135deg, #e8f7f0, #c8eedc);
+  color: #2b9d5c;
+}
+
+/* ===== 加载 & 空状态 ===== */
+.load-more-wrap {
+  text-align: center;
+  padding: 32rpx 0;
+}
+
+.no-more {
+  font-size: 24rpx;
+  color: #d0c4e8;
+  letter-spacing: 4rpx;
+}
+
+.list-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80rpx 0;
+}
+
+.placeholder-emoji {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.placeholder-text {
+  font-size: 28rpx;
+  color: #c0b0d8;
+}

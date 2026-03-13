@@ -1,26 +1,56 @@
-<t-navbar title="发布动态" left-arrow />
-<view class="page">
-  <view class="release-container">
-    <view class="upload box">
-      <t-upload t-class="upload-class" media-type="{{['image']}}" files="{{originFiles}}" gridConfig="{{gridConfig}}" bind:success="handleSuccess" bind:remove="handleRemove" max="4" />
+<view class="release-page">
+
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <text class="page-title">{{isEdit ? '✏️ 编辑商单' : '📝 新建商单'}}</text>
+    <text class="page-subtitle">{{isEdit ? '修改你的商单信息' : '记录你的接单信息'}}</text>
+  </view>
+
+  <!-- 基础信息 -->
+  <view class="form-card">
+    <view class="section-label">基础信息</view>
+    <view class="form-item">
+      <text class="form-label">商单名称</text>
+      <t-input placeholder="请输入合作项目名称" borderless value="{{formData.title}}" bind:change="onTitleChange" t-class="input-class" />
     </view>
-    <view class="desc box">
-      <view class="desc-label">添加描述</view>
-      <t-textarea t-class="desc-class" t-class-textarea="placeholder-class" placeholder="分享你此刻的想法" maxlength="500" disableDefaultPadding="{{true}}" indicator />
-    </view>
-    <view class="taggroup box">
-      <t-cell t-class-title="cell-title-class" t-class-note="cell-note-class" title="添加标签">
-        <block wx:for="{{tags}}" wx:key="index">
-          <t-check-tag t-class="tag-class" size="medium" default-checked="{{index===0}}" variant="dark" content="#{{item}}" slot="note" />
-        </block>
-      </t-cell>
-    </view>
-    <view class="location box">
-      <t-cell title="所在位置" hover arrow leftIcon="location" bindtap="gotoMap" />
-    </view>
-    <view class="btngroup box">
-      <t-button t-class="btn-class" theme="light" icon="file-copy" content="存草稿" size="large" bindtap="saveDraft"></t-button>
-      <t-button t-class="btn-class" theme="primary" icon="upload" content="发布" size="large" bindtap="release"></t-button>
+    <view class="form-divider"></view>
+    <view class="form-item">
+      <text class="form-label">合作平台</text>
+      <t-input placeholder="例: 小红书 / 抖音" borderless value="{{formData.platform}}" bind:change="onPlatformChange" t-class="input-class" />
     </view>
   </view>
+
+  <!-- 资金信息 -->
+  <view class="form-card">
+    <view class="section-label">资金信息</view>
+    <view class="form-item">
+      <text class="form-label">垫付金额</text>
+      <t-input placeholder="0.00" type="digit" borderless value="{{formData.advanceAmount}}" bind:change="onAdvanceChange" t-class="input-class" />
+    </view>
+    <view class="form-divider"></view>
+    <view class="form-item">
+      <text class="form-label">预计收入</text>
+      <t-input placeholder="0.00" type="digit" borderless value="{{formData.incomeAmount}}" bind:change="onIncomeChange" t-class="input-class" />
+    </view>
+  </view>
+
+  <!-- 备注描述 -->
+  <view class="form-card">
+    <view class="section-label">备注描述</view>
+    <t-textarea placeholder="请填写商单要求或任何备忘记录..." value="{{formData.description}}" disableDefaultPadding="{{true}}" bind:change="onDescChange" t-class="textarea-class" />
+  </view>
+
+  <!-- 图片上传 -->
+  <view class="form-card">
+    <view class="section-label">相关截图凭证</view>
+    <t-upload mediaType="{{['image']}}" files="{{fileList}}" max="5" bind:add="onAddMedia" bind:remove="onRemoveMedia" />
+  </view>
+
+  <!-- 底部操作 -->
+  <view class="action-area">
+    <t-button theme="primary" size="large" block bindtap="onSubmit" loading="{{submitting}}">保存提交</t-button>
+    <t-button wx:if="{{isEdit}}" theme="danger" variant="outline" size="large" block bindtap="onDelete" style="margin-top: 20rpx">删除此商单</t-button>
+  </view>
+
+  <t-toast id="t-toast" />
 </view>

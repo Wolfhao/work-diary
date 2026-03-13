@@ -1,0 +1,114 @@
+.my-container {
+  min-height: 100vh;
+  background: linear-gradient(160deg, #fdf6ec 0%, #f5f0ff 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80rpx 40rpx 60rpx;
+  box-sizing: border-box;
+}
+
+/* 顶部 LOGO 区 */
+.app-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 48rpx;
+}
+
+.app-logo {
+  font-size: 100rpx;
+  line-height: 1.2;
+  margin-bottom: 12rpx;
+}
+
+.app-name {
+  font-size: 48rpx;
+  font-weight: 800;
+  color: #3a2f5f;
+  letter-spacing: 4rpx;
+  margin-bottom: 10rpx;
+}
+
+.app-slogan {
+  font-size: 28rpx;
+  color: #9b87c2;
+}
+
+/* 功能介绍卡片 */
+.feature-card {
+  width: 100%;
+  background: #fff;
+  border-radius: 28rpx;
+  padding: 12rpx 36rpx;
+  box-shadow: 0 8rpx 32rpx rgba(100, 80, 180, 0.08);
+  margin-bottom: 36rpx;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  padding: 30rpx 0;
+}
+
+.feature-emoji {
+  font-size: 52rpx;
+  margin-right: 28rpx;
+  flex-shrink: 0;
+}
+
+.feature-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.feature-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 6rpx;
+}
+
+.feature-desc {
+  font-size: 24rpx;
+  color: #999;
+  line-height: 1.5;
+}
+
+.feature-divider {
+  height: 2rpx;
+  background: linear-gradient(to right, transparent, #f0ecff, transparent);
+}
+
+/* 俏皮文案 */
+.fun-quote {
+  padding: 24rpx 36rpx;
+  background: rgba(155, 135, 194, 0.10);
+  border-radius: 20rpx;
+  margin-bottom: 32rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.quote-text {
+  font-size: 26rpx;
+  color: #7c67b8;
+  line-height: 1.6;
+  text-align: center;
+  display: block;
+  font-style: italic;
+}
+
+/* 版本号 */
+.version-row {
+  font-size: 22rpx;
+  color: #ccc;
+  margin-bottom: 60rpx;
+}
+
+/* 退出登录 */
+.logout-wrap {
+  width: 100%;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}

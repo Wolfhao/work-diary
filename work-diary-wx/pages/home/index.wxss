@@ -1,0 +1,52 @@
+page {
+  background-color: #f6f6f6;
+}
+.container {
+  padding-bottom: 120rpx; /* 为tabbar留白 */
+}
+.dashboard-header {
+  background-color: #0052d9; /* TDesign 主题蓝 */
+  padding: 100rpx 32rpx 60rpx;
+  border-radius: 0 0 32rpx 32rpx;
+}
+.dashboard-title {
+  color: #fff;
+  font-size: 40rpx;
+  font-weight: bold;
+  margin-bottom: 40rpx;
+}
+.card {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 40rpx 32rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.05);
+}
+.stats-row {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+.stats-item {
+  flex: 1;
+}
+.stats-value {
+  font-size: 48rpx;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+.stats-label {
+  font-size: 24rpx;
+  color: #666;
+}
+.stats-divider {
+  margin: 32rpx 0;
+  height: 1px;
+  background-color: #f0f0f0;
+}
+.stats-row.meta {
+  font-size: 24rpx;
+  color: #999;
+}
+.custom-tabs {
+  margin-top: 24rpx;
+}

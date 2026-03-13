@@ -1,0 +1,11 @@
+{
+    "usingComponents": {
+        "t-tabs": "tdesign-miniprogram/tabs/tabs",
+        "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
+        "order-list": "/components/order-list/index",
+        "t-toast": "tdesign-miniprogram/toast/toast",
+        "t-loading": "tdesign-miniprogram/loading/loading",
+        "t-search": "tdesign-miniprogram/search/search"
+    },
+    "navigationBarTitleText": "商单"
+}

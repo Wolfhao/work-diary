@@ -1,57 +1,47 @@
-const app = getApp();
+import Toast from 'tdesign-miniprogram/toast/index';
 
 Component({
   data: {
-    value: '', // 初始值设置为空，避免第一次加载时闪烁
-    unreadNum: 0, // 未读消息数量
+    active: 0,
     list: [
       {
         icon: 'home',
-        value: 'index',
-        label: '首页',
+        text: '看板',
+        url: '/pages/home/index',
       },
       {
-        icon: 'chat',
-        value: 'notice',
-        label: '消息',
+        icon: 'view-list',
+        text: '商单',
+        url: '/pages/order/index',
       },
       {
         icon: 'user',
-        value: 'my',
-        label: '我的',
+        text: '我的',
+        url: '/pages/my/index',
       },
     ],
   },
-  lifetimes: {
-    ready() {
-      const pages = getCurrentPages();
-      const curPage = pages[pages.length - 1];
-      if (curPage) {
-        const nameRe = /pages\/(\w+)\/index/.exec(curPage.route);
-        if (nameRe === null) return;
-        if (nameRe[1] && nameRe) {
-          this.setData({
-            value: nameRe[1],
-          });
-        }
-      }
-
-      // 同步全局未读消息数量
-      this.setUnreadNum(app.globalData.unreadNum);
-      app.eventBus.on('unread-num-change', (unreadNum) => {
-        this.setUnreadNum(unreadNum);
-      });
-    },
-  },
   methods: {
-    handleChange(e) {
-      const { value } = e.detail;
-      wx.switchTab({ url: `/pages/${value}/index` });
-    },
+    onChange(event) {
+      if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+        const index = event.detail.value;
+        const currentData = this.data.list[index];
 
-    /** 设置未读消息数量 */
-    setUnreadNum(unreadNum) {
-      this.setData({ unreadNum });
+
+        this.setData({ active: index });
+
+        wx.switchTab({
+          url: currentData.url,
+        });
+      }
+    },
+    init() {
+      const page = getCurrentPages().pop();
+      const route = page ? page.route : '';
+      const active = this.data.list.findIndex(
+        (item) => (item.url.startsWith('/') ? item.url.substr(1) : item.url) === `${route}`,
+      );
+      this.setData({ active });
     },
   },
 });

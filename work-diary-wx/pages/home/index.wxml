@@ -1,48 +1,70 @@
-<nav nav-type="search" />
-<view class="home-container">
-  <view class="home-content">
-    <t-tabs defaultValue="recommend">
-      <t-tab-panel label="推荐" value="recommend">
-        <t-pull-down-refresh
-          value="{{enable}}"
-          bind:refresh="onRefresh"
-          loadingTexts="{{['下拉刷新', '松手刷新', '正在刷新', '刷新完成']}}"
-        >
-          <view class="home-card-list">
-            <t-swiper
-              list="{{swiperList}}"
-              navigation="{{ { type: 'dots-bar' } }}"
-              height="488rpx"
-              style="width: 340rpx"
-            />
-            <card
-              wx:for="{{cardInfo}}"
-              wx:key="index"
-              desc="{{item.desc}}"
-              url="{{item.url}}"
-              tags="{{item.tags}}"
-            />
-          </view>
-        </t-pull-down-refresh>
-      </t-tab-panel>
-      <t-tab-panel label="我的关注" value="follow">
-        <view class="home-card-list">
-          <card
-            wx:for="{{focusCardInfo}}"
-            wx:key="index"
-            desc="{{item.desc}}"
-            url="{{item.url}}"
-            tags="{{item.tags}}"
-          />
+<view class="dashboard-container">
+  <!-- 欢迎卡片区 -->
+  <view class="greeting-card">
+    <!-- 背景装饰图案通常由 CSS 背景图或者 SVG 实现 -->
+    <view class="greeting-content">
+      <view class="greeting-title">
+        <text>你好，铲屎官 👋，</text>
+        <text class="greeting-subtitle">今天也要搞钱呀！</text>
+      </view>
+      <view class="greeting-date">当前日期: {{currentDate}}</view>
+    </view>
+  </view>
+
+  <view class="dashboard-main">
+    
+    <!-- 垫付情况 (黄/红双拼或并排色块) -->
+    <view class="advance-group" style="margin-bottom: 24rpx;">
+      <view class="advance-card yellow-card">
+        <text class="advance-title">垫付情况</text>
+        <text class="advance-label">总垫付金额</text>
+        <text class="advance-value">¥{{stats.totalAdvanceAmount || '0.00'}}</text>
+      </view>
+      <view class="advance-card red-card">
+        <text class="advance-icon">⚠️</text>
+        <text class="advance-label">未收回垫付</text>
+        <text class="advance-value">¥{{stats.pendingAdvanceAmount || '0.00'}}</text>
+      </view>
+    </view>
+
+    <!-- 商单概况 (蓝色背景) -->
+    <view class="detail-card blue-card">
+      <view class="card-caption">
+        <text>商单概况</text>
+      </view>
+      <view class="detail-row">
+        <view class="detail-item">
+          <text class="detail-label">进行中</text>
+          <text class="detail-value">{{stats.inProgressOrderCount || '0'}}单</text>
         </view>
-      </t-tab-panel>
-    </t-tabs>
+        <view class="divider"></view>
+        <view class="detail-item">
+          <text class="detail-label">已完成</text>
+          <text class="detail-value">{{stats.completedOrderCount || '0'}}单</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 收入与订单数卡片 (并排) -->
+    <view class="summary-row" style="margin-bottom: 24rpx;">
+      <view class="summary-col">
+        <text class="summary-label">接单总收入</text>
+        <text class="summary-value">¥{{stats.totalIncomeAmount || '0.00'}}</text>
+      </view>
+      <view class="summary-col">
+        <text class="summary-label">总商单数</text>
+        <text class="summary-value">{{stats.totalOrderCount || '0'}}单</text>
+      </view>
+    </view>
+
+    <!-- 净利润卡片 (主色) 移至最底部 -->
+    <view class="profit-card">
+      <view class="profit-header">
+        <text class="icon-yen">¥</text>
+        <text class="profit-label">当前净利润</text>
+      </view>
+      <view class="profit-value">¥{{netProfit}}</view>
+    </view>
+
   </view>
 </view>
-
-<view class="home-release">
-  <t-button theme="primary" size="large" icon="add" shape="round" bindtap="goRelease">
-    发布
-  </t-button>
-</view>
-<t-message id="t-message" />

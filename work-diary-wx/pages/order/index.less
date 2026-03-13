@@ -1,0 +1,76 @@
+@import '/variable.less';
+
+@bg-gradient: linear-gradient(170deg, #fff5f8 0%, #f0eeff 50%, #e8f8ff 100%);
+@card-shadow: 0 12rpx 40rpx rgba(120, 90, 200, 0.10);
+@card-radius: 28rpx;
+@text-primary: #3a2f5f;
+@purple-accent: #8b6fc0;
+
+@order-tab-item-height: 96rpx;
+@search-bar-height: 104rpx;
+
+.order-container {
+    height: calc(100vh - @tab-bar-height);
+    background: @bg-gradient;
+    position: relative;
+
+    .search-wrap {
+        padding: 16rpx 32rpx;
+        height: @search-bar-height;
+        box-sizing: border-box;
+        background: transparent;
+
+        // 搜索框转为浅紫圆角风格
+        .t-search {
+            --td-search-bg-color: rgba(240, 236, 255, 0.80);
+            --td-search-border-radius: 100rpx;
+        }
+    }
+
+    .t-tabs {
+        width: 100%;
+        height: calc(100% - @search-bar-height);
+
+        // Tab 头部样式覆盖
+        --td-tab-item-active-color: @purple-accent;
+        --td-tab-item-font-size: 28rpx;
+
+        &__content {
+            height: calc(100% - @order-tab-item-height);
+            overflow: auto;
+            background: transparent;
+            padding: 16rpx 24rpx 24rpx;
+        }
+    }
+
+    // FAB 按钮 → 紫色渐变
+    .fab-button {
+        position: fixed;
+        right: 48rpx;
+        bottom: calc(@tab-bar-height + 48rpx);
+        width: 128rpx;
+        height: 128rpx;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #c3a8f0 0%, #845ec2 100%);
+        box-shadow: 0 10rpx 32rpx rgba(120, 90, 200, 0.40);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
+
+        .fab-icon {
+            color: #fff;
+            font-size: 64rpx;
+            line-height: 64rpx;
+            margin-top: -10rpx;
+        }
+
+        .fab-text {
+            color: #fff;
+            font-size: 20rpx;
+            margin-top: 4rpx;
+            opacity: 0.85;
+        }
+    }
+}

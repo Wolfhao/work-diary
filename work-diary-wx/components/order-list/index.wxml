@@ -1,0 +1,59 @@
+<view class="list-container">
+  <block wx:if="{{formattedList.length > 0}}">
+    <view class="order-card" wx:for="{{formattedList}}" wx:key="id" bindtap="onOrderDetail" data-id="{{item.id}}">
+      
+      <!-- 卡片头部：头像 + 标题 + 状态标签 -->
+      <view class="card-header">
+        <view class="brand-avatar">{{item.platform ? item.platform[0] : '商'}}</view>
+        <view class="card-meta">
+          <text class="title">{{item.title}}</text>
+          <text class="subtitle">{{item.platform || '未知平台'}} · {{item.formattedTime}}</text>
+        </view>
+        <view class="status-tag {{item.status === 40 ? 'success' : (item.status === 30 ? 'warning' : (item.status === 90 ? 'cancel' : 'primary'))}}">
+          {{item.status === 40 ? '已完成' : (item.status === 30 ? '待结款' : (item.status === 20 ? '制作中' : (item.status === 10 ? '待开工' : '已取消')))}}
+        </view>
+      </view>
+
+      <!-- 进度条 -->
+      <view class="progress-bar">
+        <view class="progress-step {{item.status >= 10 ? 'active' : ''}}">接单</view>
+        <view class="progress-line-seg {{item.status >= 20 ? 'filled' : ''}}"></view>
+        <view class="progress-step {{item.status >= 20 ? 'active' : ''}}">制作</view>
+        <view class="progress-line-seg {{item.status >= 30 ? 'filled' : ''}}"></view>
+        <view class="progress-step {{item.status >= 30 ? 'active' : ''}}">交付</view>
+        <view class="progress-line-seg {{item.status >= 40 ? 'filled' : ''}}"></view>
+        <view class="progress-step {{item.status >= 40 ? 'active done' : ''}}">结款</view>
+      </view>
+
+      <!-- 卡片底部资金状态 -->
+      <view class="card-footer">
+        <view class="chip {{item.isAdvanceRecovered === 1 ? 'chip-ok' : 'chip-pending'}}">
+          {{item.isAdvanceRecovered === 1 ? '✓ 垫付已收回' : '⏳ 垫付未收回'}}
+        </view>
+        <view class="chip {{item.isIncomeReceived === 1 ? 'chip-ok' : 'chip-pending'}}">
+          {{item.isIncomeReceived === 1 ? '✓ 尾款已到账' : '⏳ 尾款未到账'}}
+        </view>
+      </view>
+
+      <!-- 操作按钮区 -->
+      <view class="card-actions" wx:if="{{item.status === 10 || item.status === 20 || item.status === 30}}">
+        <view class="action-btn primary" wx:if="{{item.status === 10 || item.status === 20}}" catchtap="onActionTap" data-action="completeWork" data-item="{{item}}">🎉 交付完毕</view>
+        <view class="action-btn secondary" wx:if="{{item.status === 30 && item.isAdvanceRecovered === 0 && item.advanceAmount > 0}}" catchtap="onActionTap" data-action="recoverAdvance" data-item="{{item}}">💰 核销垫付</view>
+        <view class="action-btn success" wx:if="{{item.status === 30 && item.isIncomeReceived === 0}}" catchtap="onActionTap" data-action="receiveIncome" data-item="{{item}}">✅ 确认收款</view>
+      </view>
+    </view>
+    
+    <!-- 加载状态 -->
+    <view class="load-more-wrap">
+      <t-loading wx:if="{{loading}}" theme="circular" size="40rpx" text="加载中..." />
+      <text wx:if="{{!hasMore && formattedList.length > 0}}" class="no-more">· 没有更多了 ·</text>
+    </view>
+  </block>
+  
+  <block wx:else>
+    <view class="list-placeholder" wx:if="{{!loading}}">
+      <text class="placeholder-emoji">📭</text>
+      <text class="placeholder-text">暂无相关商单记录</text>
+    </view>
+  </block>
+</view>
