@@ -64,6 +64,8 @@ services:
   mysql:
     image: mysql:5.7
     container_name: work-diary-mysql
+    ports:
+      - "3306:3306"  # 添加这一行，将主机的 3306 端口映射到容器的 3306 端口
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASS}
@@ -102,8 +104,8 @@ services:
       redis-server
       --requirepass ${REDIS_PASS}
       --appendonly yes
-      --maxmemory 128M  # 限制 Redis 最大内存 128MB
-      --maxmemory-policy allkeys-lru  # 内存满时淘汰策略
+      --maxmemory 128M
+      --maxmemory-policy allkeys-lru
     volumes:
       - redis_data:/data
     healthcheck:
