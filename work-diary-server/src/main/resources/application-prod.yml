@@ -54,3 +54,15 @@ sa-token:
   is-concurrent: false
   is-share: false
   token-style: uuid
+
+# Knife4j 增强配置（核心：添加备案号）
+knife4j:
+  enable: true
+  # 覆盖 Swagger UI 路径（Knife4j 增强版页面）
+  setting:
+    # 开启自定义底部
+    enableFooterCustom: true
+    # 自定义底部内容（这里放备案号）
+    footerCustomContent: <div style="text-align:center; padding:10px 0; font-size:12px; color:#666;"><a href="https://beian.miit.gov.cn/" target="_blank" style="color:#666; text-decoration:none;">${BA_ID}</a></div>
+    # 可选：保留原有 Knife4j 底部（如果想完全替换就设为 false）
+    enableFooter: true

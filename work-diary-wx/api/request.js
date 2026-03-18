@@ -2,9 +2,7 @@ import Toast from 'tdesign-miniprogram/toast/index';
 
 // 本地开发环境的后端地址
 
-const BASE_URL = 'https://47.104.134.92';
-// const BASE_URL = 'https://www.suntool.online';
-// const BASE_URL = 'https://4vhdg4845791.vicp.fun';
+// const BASE_URL = 'https:localhost:8080';
 /**
  * 封装微信 request 为 Promise 接口
  * 自动携带 Sa-Token (Authorization)
