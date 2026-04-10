@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/home/index"
   ],
   "usingComponents": {
     "t-toast": "tdesign-miniprogram/toast/toast"
