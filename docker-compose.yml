@@ -15,9 +15,12 @@ services:
     image: work-diary-server:latest
     container_name: work-diary-server
     restart: unless-stopped
-    ports:
-      - "8080:8080"
+    # 注释掉 8080 端口映射，只通过 Nginx 转发
+#    ports:
+#      - "8080:8080"
     environment:
+      # 时区配置（新增，解决时间偏移）
+      TZ: Asia/Shanghai
       SPRING_PROFILES_ACTIVE: prod
       # JVM 内存优化（核心！适配 2GB 服务器）
       JAVA_OPTS: "-Xms512m -Xmx768m -XX:+UseG1GC -XX:+HeapDumpOnOutOfMemoryError"
@@ -43,6 +46,9 @@ services:
     # 本地存储模式时挂载上传目录（COS 模式可不挂）
     volumes:
       - upload_data:/data/upload
+      # 同步宿主机时区
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
     depends_on:
       mysql:
         condition: service_healthy
@@ -68,12 +74,15 @@ services:
       - "3306:3306"  # 添加这一行，将主机的 3306 端口映射到容器的 3306 端口
     restart: unless-stopped
     environment:
+      TZ: Asia/Shanghai
       MYSQL_ROOT_PASSWORD: ${DB_PASS}
       MYSQL_DATABASE: ${DB_NAME:-work_diary}
       MYSQL_CHARSET: utf8mb4
       # MySQL 内存优化
       MYSQL_INITDB_SKIP_TZINFO: "1"
+    command: --default-time-zone='+08:00'
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - mysql_data:/var/lib/mysql
       - ./doc/sql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
       # 自定义 MySQL 配置（优化内存使用，需新建该文件）
