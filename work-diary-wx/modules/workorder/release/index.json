@@ -1,0 +1,10 @@
+{
+    "usingComponents": {
+        "t-button": "tdesign-miniprogram/button/button",
+        "t-input": "tdesign-miniprogram/input/input",
+        "t-textarea": "tdesign-miniprogram/textarea/textarea",
+        "t-toast": "tdesign-miniprogram/toast/toast",
+        "image-uploader": "/components/image-uploader/index"
+    },
+    "navigationBarTitleText": "发布商单"
+}

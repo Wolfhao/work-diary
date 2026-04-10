@@ -1,0 +1,205 @@
+<view class="pingyao-container" style="--status-bar-height: {{statusBarHeight}}">
+
+  <!-- 自定义导航栏 -->
+  <view class="nav-bar">
+    <view class="nav-back" bindtap="onBackTap">
+      <view class="nav-back-icon">
+        <view class="nav-back-chevron"></view>
+      </view>
+    </view>
+    <view class="nav-title">平遥古城两日浪漫之旅</view>
+    <view class="nav-placeholder"></view>
+  </view>
+
+  <view class="main-content">
+
+    <!-- 1. 浪漫封面卡片 -->
+    <view class="cover-card">
+      <view class="cover-title">平遥古城两日浪漫之旅 <text class="anniversary-badge">恋爱一周年版</text></view>
+      <view class="husband-honor">❤️ 此浪漫行程由老公大人亲手策划 ❤️</view>
+      <view class="cover-meta">
+        <view class="cover-meta-item">📅 日期：2025年6月14日 - 6月15日</view>
+        <view class="cover-meta-item">🏨 住宿：松盛长客栈（南大街178号）</view>
+      </view>
+    </view>
+
+    <!-- 2. 古城地图预览 -->
+    <view class="section-card map-card">
+      <view class="section-title">🗺️ 平遥古城地图预览</view>
+      <image
+        class="map-img"
+        src="https://www.suntool.online/file/download?key=static/pingyao-ditu.png"
+        mode="widthFix"
+        show-menu-by-longpress="{{true}}"
+      ></image>
+    </view>
+
+    <!-- 3. 浪漫启程·准备篇 -->
+    <view class="section-card preface-card">
+      <view class="section-title">💖 浪漫启程·准备篇</view>
+      <view class="section-text">• <text class="highlight">6月12日晚</text> 👗：李晴小朋友逛商场精心挑选漂亮小裙裙，由老公大人亲自把关拍板，确保旅途穿搭美美的～</view>
+      <view class="section-text">• <text class="highlight">6月13日晚</text> 🍷🍢：微醺小酒搭配美味烧烤，提前预热浪漫氛围，为平遥之旅养精蓄锐✨</view>
+      <view class="section-text preface-end">一切准备就绪，只待开启我们的一周年平遥古城浪漫之旅～</view>
+    </view>
+
+    <!-- 3. 去程交通 -->
+    <view class="section-card train-card">
+      <view class="section-title">🚄 去程交通信息</view>
+      <view class="train-item">
+        <view class="train-route">济南东 09:27 → 太原南 12:55</view>
+        <view class="train-seat">座位：04车07C号、04车07D号（相邻双人座）</view>
+      </view>
+      <view class="train-divider"></view>
+      <view class="train-item">
+        <view class="train-route">太原南 13:21 → 平遥古城 13:52</view>
+        <view class="train-seat">座位：06车18D号、06车18F号（相邻靠窗双人座）</view>
+      </view>
+      <view class="train-tip">💡 抵达后可在车站休息区稍作调整，预计15:00前可到达客栈办理入住</view>
+    </view>
+
+    <!-- 4. 第一天 -->
+    <view class="day-card">
+      <view class="day-title">第一天（6月14日）</view>
+
+      <view class="weather-card">
+        <view class="weather-icon">🌧️→☀️</view>
+        <view class="weather-content">
+          <view class="weather-main">今日天气：小雨转晴，15°C - 24°C，南风1-3级</view>
+          <view class="weather-tip">💡 建议携带折叠伞，雨天石板路较滑请注意安全，气温较低需准备薄外套</view>
+        </view>
+      </view>
+
+      <view class="time-block">
+        <view class="time-label">15:00 - 15:30 | 抵达与入住</view>
+        <view class="time-content">• 从平遥古城高铁站打车到松盛长客栈，约15-20分钟</view>
+        <view class="time-content">• 办理入住：<text class="attraction">松盛长客栈（南大街178号）</text>，位于古城中心南大街</view>
+        <view class="time-note">提示：建议提前与客栈联系，确认具体位置和入住事宜。（老公大人已经贴心安排好了）</view>
+      </view>
+
+      <view class="time-block">
+        <view class="time-label">16:00 - 19:00 | 下午游览</view>
+        <view class="time-content">• 路线：松盛长客栈 → 迎薰门（沿南大街向南直行，约8分钟）</view>
+        <view class="time-content">• <text class="attraction">迎薰门</text> - 古城南门，拍照留念，登城楼俯瞰全貌</view>
+        <view class="time-content">• <text class="attraction">古城墙</text> - 从迎薰门向东步行至东南角楼，约15分钟</view>
+        <view class="time-content">• <text class="attraction">城隍庙</text> - 沿城隍庙街向北步行5分钟，中国现存最完整的城隍庙之一</view>
+        <view class="time-content">• <text class="attraction">文庙</text> - 城隍庙向北步行3分钟，中国保存最完整的文庙建筑群之一</view>
+        <view class="time-note">提示：古城通票125元/人，含22个景点，3天有效，建议购买通票。开放时间：8:00-18:00。</view>
+      </view>
+
+      <view class="time-block">
+        <view class="time-label">19:00 - 20:00 | 晚餐</view>
+        <view class="time-content">• <text class="restaurant">洪武记饭店</text>（南大街84号）</view>
+        <view class="time-content">• 推荐菜品：黄米凉糕（象征甜甜蜜蜜）、陈醋老牛肉（寓意长长久久）</view>
+        <view class="time-content">• 💑 可点一份"心心相印"双人套餐，店家可能会赠送周年纪念小甜品</view>
+        <view class="time-note">提示：该饭店位于南大街中心位置，生意火爆，可能需要排队等候。</view>
+      </view>
+
+      <view class="time-block">
+        <view class="time-label">20:30 - 21:00 | 迎薰门灯光秀</view>
+        <view class="time-content">• 💑 <text class="restaurant">迎薰门广场</text> 免费观看3D灯光秀，时长约18分钟（最佳位置：广场中央爱心花坛旁）</view>
+        <view class="time-note">提示：建议提前30分钟到达占位。迎薰门20:00关闭，需从其他城门返回古城内。</view>
+      </view>
+
+      <view class="time-block">
+        <view class="time-label">21:30 - 23:00 | 酒吧</view>
+        <view class="time-content">• 在南大街附近有很多酒吧，可以小酌一杯哦😍😍😍</view>
+        <view class="time-note">提示：李晴小朋友需要适量饮酒，不要喝吐了哦😛😛😛</view>
+      </view>
+
+      <view class="time-block">
+        <view class="time-label">23:00 - 24:00 | 做饭做饭做饭!!! 😍😍😍</view>
+        <view class="time-content">• 💑 成年人的运动 💑</view>
+        <view class="time-note">提示：十八岁以下不可以参加哦😛😛😛</view>
+      </view>
+    </view>
+
+    <!-- 5. 第二天 -->
+    <view class="day-card">
+      <view class="day-title">第二天（6月15日）</view>
+
+      <view class="weather-card">
+        <view class="weather-icon">☀️</view>
+        <view class="weather-content">
+          <view class="weather-main">今日天气：晴，18°C - 29°C，西北风1-3级</view>
+          <view class="weather-tip">💡 天气晴朗适宜游览，建议携带防晒用品和充足饮用水</view>
+        </view>
+      </view>
+
+      <view class="time-block">
+        <view class="time-label">08:30 - 09:30 | 早餐与县衙升堂</view>
+        <view class="time-content">• 前往 <text class="restaurant">董记炒碗托</text>（衙门街41号）享用早餐</view>
+        <view class="time-content">• 推荐：炒碗托、沙棘汤</view>
+        <view class="time-content">• 路线：松盛长客栈 → 董记炒碗托（沿南大街向北至城隍庙街左转，约5分钟）</view>
+        <view class="time-content">• 9:30 观看 <text class="attraction">县衙升堂表演</text>（董记炒碗托步行2分钟可达）</view>
+        <view class="time-note">提示：升堂表演每日三场：9:30 / 11:00 / 15:30，建议提前15-20分钟到达占座。</view>
+      </view>
+
+      <view class="time-block">
+        <view class="time-label">10:00 - 12:30 | 上午游览</view>
+        <view class="time-content">• <text class="attraction">平遥县衙</text> - 中国现存规模最大的县衙</view>
+        <view class="time-content">• <text class="attraction">同兴公镖局</text>（南大街北段）- 了解古代镖师文化</view>
+        <view class="time-content">• <text class="attraction">协同庆金库</text>（南大街中段）- 参观地下金库，体验古代金融文化（镖局向南步行3分钟）</view>
+      </view>
+
+      <view class="time-block">
+        <view class="time-label">13:00 - 13:30 | 特色小吃</view>
+        <view class="time-content">• <text class="restaurant">梁先森酸奶</text>（南大街92号）- 品尝沙棘酸奶和老陈醋酸奶</view>
+        <view class="time-content">• 推荐：沙棘酸奶（酸甜初恋味）、老陈醋酸奶（醇厚长久味）</view>
+        <view class="time-content">• 💑 情侣互动：可体验DIY酸奶，制作专属我们的爱情调味</view>
+      </view>
+
+      <view class="time-block">
+        <view class="time-label">14:00 - 15:30 | 《又见平遥》演出</view>
+        <view class="time-content">• 💑 <text class="attraction">《又见平遥》</text> 沉浸式实景演出（结束后可在剧场外爱情锁墙打卡）</view>
+        <view class="time-content">• 路线：梁先森酸奶 → 又见平遥剧场（沿南大街向北至西门，步行约15分钟，或打车5分钟）</view>
+        <view class="time-note">提示：演出地点在古城西门外，建议提前30分钟到达。演出时长约90分钟。</view>
+      </view>
+
+      <view class="time-block">
+        <view class="time-label">16:00 - 17:00 | 自由活动与返程准备</view>
+        <view class="time-content">• 可在南大街选购纪念品</view>
+        <view class="time-content">• 返回客栈取行李，准备离开</view>
+      </view>
+    </view>
+
+    <!-- 6. 返程交通 -->
+    <view class="section-card train-card">
+      <view class="section-title">🚄 返程交通信息</view>
+      <view class="train-item">
+        <view class="train-route">平遥古城 17:42 → 太原南 18:14</view>
+        <view class="train-seat">座位：03车13D号、03车13F号（相邻靠窗双人座）</view>
+      </view>
+      <view class="train-divider"></view>
+      <view class="train-item">
+        <view class="train-route">太原南 19:12 → 济南西 22:38</view>
+        <view class="train-seat">座位：02车14D号、02车14F号（相邻靠窗双人座）</view>
+      </view>
+      <view class="train-tip">💡 建议17:00前从客栈出发前往平遥古城站，车程约15分钟</view>
+    </view>
+
+    <!-- 7. 实用信息 -->
+    <view class="section-card info-card">
+      <view class="section-title">📋 实用信息</view>
+      <view class="info-table">
+        <view class="info-row">
+          <view class="info-label">门票信息</view>
+          <view class="info-value">古城通票125元/人，含22个景点，3天有效；《又见平遥》演出票238元/人</view>
+        </view>
+        <view class="info-row">
+          <view class="info-label">交通提示</view>
+          <view class="info-value">古城内禁止私家车进入，建议步行或乘坐观光车（10元/次）</view>
+        </view>
+        <view class="info-row">
+          <view class="info-label">穿着建议</view>
+          <view class="info-value">6月气温较高，建议穿着轻薄舒适衣物，舒适运动鞋，携带防晒用品</view>
+        </view>
+        <view class="info-row info-row-last">
+          <view class="info-label">注意事项</view>
+          <view class="info-value">古城内商铺较多，购物时请注意比价；谨慎对待路边"免费讲解"，多为推销陷阱</view>
+        </view>
+      </view>
+      <view class="final-note">温馨提示：本行程最终解释权归老公大人所有，李晴小朋友乖乖听话跟随即可（不听话家法伺候哦😏😏😏）！</view>
+    </view>
+
+  </view>
+</view>

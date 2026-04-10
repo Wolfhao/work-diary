@@ -1,0 +1,41 @@
+<view class="workorder-container" style="--status-bar-height: {{statusBarHeight}}">
+  <!-- 自定义导航栏：左侧返回，中间标题，右侧留空（避免与微信胶囊按钮重叠） -->
+  <view class="nav-bar">
+    <view class="nav-back" bindtap="onBackTap">
+      <view class="nav-back-icon">
+        <view class="nav-back-chevron"></view>
+      </view>
+    </view>
+    <view class="nav-title">📊 商单管理</view>
+    <view class="nav-placeholder"></view>
+  </view>
+
+  <!-- 内容容器 -->
+  <view class="main-content">
+    <!-- 顶部标签切换 -->
+    <view class="tabs-wrap">
+      <view class="tab-item {{activeTab === 'dashboard' ? 'active' : ''}}" bindtap="onTabChange" data-value="dashboard">
+        💹 数据看板
+      </view>
+      <view class="tab-item {{activeTab === 'list' ? 'active' : ''}}" bindtap="onTabChange" data-value="list">
+        📝 商单列表
+      </view>
+    </view>
+
+    <!-- 内容区域 -->
+    <view class="content-wrap">
+      <view wx:if="{{activeTab === 'dashboard'}}" class="content-panel">
+        <dashboard-container />
+      </view>
+      <view wx:if="{{activeTab === 'list'}}" class="content-panel">
+        <order-container id="order-container" />
+      </view>
+    </view>
+  </view>
+
+  <!-- FAB 新建按钮：只在商单列表 tab 显示，移出内容容器避免 stacking context 问题 -->
+  <view wx:if="{{activeTab === 'list'}}" class="fab-button" bindtap="onAddTap">
+    <text class="fab-icon">+</text>
+    <text class="fab-text">新建</text>
+  </view>
+</view>

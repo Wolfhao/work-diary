@@ -1,4 +1,6 @@
 .idea/
+.claude/
+openspec/
 */application-dev.yml
 # Docker 环境变量（含密钥，禁止提交）
 .env

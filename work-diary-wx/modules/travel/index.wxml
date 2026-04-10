@@ -1,0 +1,32 @@
+<view class="travel-container" style="--status-bar-height: {{statusBarHeight}}">
+  <!-- 自定义导航栏：fixed 定位，CSS chevron 箭头，与 workorder 风格统一 -->
+  <view class="nav-bar">
+    <view class="nav-back" bindtap="onBackTap">
+      <view class="nav-back-icon">
+        <view class="nav-back-chevron"></view>
+      </view>
+    </view>
+    <view class="nav-title">✈️ 旅游攻略</view>
+    <view class="nav-placeholder"></view>
+  </view>
+
+  <!-- 内容区（padding-top 补偿固定导航栏高度） -->
+  <view class="main-content">
+    <view class="guide-list">
+      <view
+        wx:for="{{guides}}"
+        wx:key="id"
+        class="guide-card"
+        bindtap="onGuideTap"
+        data-id="{{item.id}}"
+      >
+        <image class="guide-cover-img" src="{{item.cover}}" mode="aspectFill"></image>
+        <view class="guide-info">
+          <view class="guide-city">📍 {{item.city}}</view>
+          <view class="guide-intro">{{item.intro}}</view>
+          <view class="guide-date">📅 {{item.date}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

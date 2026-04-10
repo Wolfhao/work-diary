@@ -2,7 +2,7 @@ import Toast from 'tdesign-miniprogram/toast/index';
 
 // 本地开发环境的后端地址
 
-// const BASE_URL = 'https:localhost:8080';
+const BASE_URL = 'https://www.suntool.online';
 /**
  * 封装微信 request 为 Promise 接口
  * 自动携带 Sa-Token (Authorization)
@@ -51,7 +51,8 @@ export const request = (options) => {
             wx.removeStorageSync('Authorization');
             // TODO: 可以按需控制跳转到授权页或我的页面
             setTimeout(() => {
-              wx.switchTab({ url: '/pages/my/index' });
+              // 登录过期后重新调用登录接口，不用跳转页面
+              doLogin();
             }, 1000);
             return reject(data);
           }
@@ -88,8 +89,11 @@ export const post = (url, data, header) => request({ url, method: 'POST', data, 
 export const put = (url, data, header) => request({ url, method: 'PUT', data, header });
 export const del = (url, data, header) => request({ url, method: 'DELETE', data, header });
 
+let _loginPromise = null;
+
 export const doLogin = () => {
-  return new Promise((resolve, reject) => {
+  if (_loginPromise) return _loginPromise;
+  _loginPromise = new Promise((resolve, reject) => {
     wx.login({
       success: (res) => {
         if (res.code) {
@@ -115,7 +119,10 @@ export const doLogin = () => {
       },
       fail: reject
     });
+  }).finally(() => {
+    _loginPromise = null;
   });
+  return _loginPromise;
 };
 
 /**

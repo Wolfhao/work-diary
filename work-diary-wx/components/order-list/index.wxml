@@ -51,7 +51,7 @@
   </block>
   
   <block wx:else>
-    <view class="list-placeholder" wx:if="{{!loading}}">
+    <view class="list-placeholder" wx:if="{{!loading && formattedList.length == 0}}">
       <text class="placeholder-emoji">📭</text>
       <text class="placeholder-text">暂无相关商单记录</text>
     </view>

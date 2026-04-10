@@ -3,6 +3,7 @@ import config from './config';
 import Mock from './mock/index';
 import createBus from './utils/eventBus';
 import { connectSocket, fetchUnreadNum } from './mock/chat';
+import { doLogin } from './api/request';
 
 if (config.isMock) {
   Mock();
@@ -28,8 +29,22 @@ App({
       });
     });
 
+    this.handleLogin();
     this.getUnreadNum();
     this.connect();
+  },
+
+  handleLogin() {
+    const token = wx.getStorageSync('Authorization');
+    if (token) {
+      return;
+    }
+    doLogin().catch(() => {
+      wx.showToast({
+        title: '登录失败，请重试',
+        icon: 'none'
+      });
+    });
   },
   globalData: {
     userInfo: null,

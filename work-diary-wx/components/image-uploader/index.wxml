@@ -1,0 +1,11 @@
+<view>
+  <t-upload
+    mediaType="{{['image']}}"
+    files="{{_files}}"
+    max="{{max}}"
+    bind:add="onAdd"
+    bind:remove="onRemove"
+    disabled="{{disabled}}"
+  />
+  <t-toast id="t-toast" />
+</view>

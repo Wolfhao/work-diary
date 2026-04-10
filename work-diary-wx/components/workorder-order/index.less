@@ -1,0 +1,33 @@
+@import '/variable.less';
+
+@bg-gradient: linear-gradient(170deg, #fff5f8 0%, #f0eeff 50%, #e8f8ff 100%);
+@card-shadow: 0 12rpx 40rpx rgba(120, 90, 200, 0.10);
+@card-radius: 28rpx;
+@text-primary: #3a2f5f;
+@purple-accent: #8b6fc0;
+
+@order-tab-item-height: 96rpx;
+@search-bar-height: 104rpx;
+
+.order-container {
+    min-height: 100vh;
+    background: @bg-gradient;
+    position: relative;
+}
+
+.search-wrap {
+    padding: 16rpx 32rpx;
+    height: @search-bar-height;
+    box-sizing: border-box;
+    background: transparent;
+}
+
+.t-tabs {
+    width: 100%;
+}
+
+.t-tabs__content {
+    overflow: auto;
+    background: transparent;
+    padding: 16rpx 24rpx 24rpx;
+}

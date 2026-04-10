@@ -1,0 +1,137 @@
+.workorder-container {
+  min-height: 100vh;
+  background-color: #f5f7fa;
+}
+
+.main-content {
+  padding-top: calc(88rpx + var(--status-bar-height, 0px));
+}
+
+.nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 88rpx;
+  padding: 0 32rpx;
+  background: #fff;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+  z-index: 100;
+  padding-top: var(--status-bar-height, 0rpx);
+  min-height: calc(88rpx + var(--status-bar-height, 0rpx));
+  box-sizing: border-box;
+}
+
+.nav-back {
+  width: 88rpx;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:active .nav-back-icon {
+    background: rgba(0, 0, 0, 0.06);
+    transform: scale(0.92);
+  }
+}
+
+/* 右侧占位，不放任何按钮，避免与微信胶囊按钮冲突 */
+.nav-placeholder {
+  width: 88rpx;
+}
+
+.nav-back-icon {
+  width: 64rpx;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.nav-back-chevron {
+  width: 20rpx;
+  height: 20rpx;
+  border-top: 4rpx solid #444;
+  border-left: 4rpx solid #444;
+  border-radius: 2rpx;
+  transform: rotate(-45deg) translateX(3rpx);
+}
+
+.nav-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.tabs-wrap {
+  display: flex;
+  background: #fff;
+  margin: 24rpx 32rpx;
+  border-radius: 16rpx;
+  padding: 8rpx;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 24rpx 0;
+  font-size: 28rpx;
+  color: #666;
+  border-radius: 12rpx;
+  transition: all 0.3s;
+}
+
+.tab-item.active {
+  background: linear-gradient(135deg, #c3a8f0, #845ec2);
+  color: #fff;
+  font-weight: 600;
+}
+
+.content-wrap {
+  padding: 0 32rpx;
+  padding-bottom: 160rpx;
+}
+
+.content-panel {
+  background: #fff;
+  border-radius: 24rpx;
+  min-height: calc(100vh - 300rpx);
+  overflow: visible;
+}
+
+/* FAB 新建按钮：固定在页面右下角，直接是 workorder-container 的子元素 */
+.fab-button {
+  position: fixed;
+  right: 48rpx;
+  bottom: 80rpx;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #c3a8f0 0%, #845ec2 100%);
+  box-shadow: 0 10rpx 32rpx rgba(120, 90, 200, 0.40);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+
+  .fab-icon {
+    color: #fff;
+    font-size: 56rpx;
+    line-height: 56rpx;
+    margin-top: -6rpx;
+  }
+
+  .fab-text {
+    color: #fff;
+    font-size: 18rpx;
+    margin-top: 4rpx;
+    opacity: 0.90;
+    letter-spacing: 1rpx;
+  }
+}

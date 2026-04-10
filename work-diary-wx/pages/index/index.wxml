@@ -1,0 +1,77 @@
+<view class="workspace-container">
+
+  <!-- 背景装饰网格 -->
+  <view class="bg-grid"></view>
+  <view class="bg-glow"></view>
+
+  <!-- 品牌区域 -->
+  <view class="brand-section">
+    <view class="brand-icon-wrap">
+      <text class="brand-icon">⚡</text>
+    </view>
+    <view class="brand-info">
+      <text class="brand-name">年年工作台</text>
+      <text class="brand-subtitle">你的专属数字工作空间</text>
+    </view>
+  </view>
+
+  <!-- 功能入口网格 -->
+  <view class="grid-container">
+
+    <!-- 商单管理 -->
+    <view class="grid-item featured" bindtap="onWorkOrderTap">
+      <view class="item-icon-wrap purple">
+        <text class="item-icon">📊</text>
+      </view>
+      <view class="item-body">
+        <text class="item-title">商单管理</text>
+        <text class="item-desc">商务接单统计管理</text>
+      </view>
+      <view wx:if="{{pendingCount > 0}}" class="pending-badge">{{pendingCount}}</view>
+      <view class="item-arrow">›</view>
+    </view>
+
+    <!-- 旅游攻略 -->
+    <view class="grid-item" bindtap="onTravelTap">
+      <view class="item-icon-wrap blue">
+        <text class="item-icon">✈️</text>
+      </view>
+      <view class="item-body">
+        <text class="item-title">旅游攻略</text>
+        <text class="item-desc">城市旅游攻略</text>
+      </view>
+      <view class="item-arrow">›</view>
+    </view>
+
+    <!-- 记账本 -->
+    <view class="grid-item disabled" bindtap="onAccountTap">
+      <view class="item-icon-wrap green">
+        <text class="item-icon">💰</text>
+      </view>
+      <view class="item-body">
+        <text class="item-title">记账本</text>
+        <text class="item-desc">开发中...</text>
+      </view>
+      <view class="coming-tag">Soon</view>
+    </view>
+
+    <!-- 更多功能 -->
+    <view class="grid-item disabled" bindtap="onMoreTap">
+      <view class="item-icon-wrap orange">
+        <text class="item-icon">🚀</text>
+      </view>
+      <view class="item-body">
+        <text class="item-title">更多功能</text>
+        <text class="item-desc">敬请期待</text>
+      </view>
+      <view class="coming-tag">Soon</view>
+    </view>
+
+  </view>
+
+  <!-- 底部版本信息 -->
+  <view class="footer-info">
+    <text class="footer-text">年年工作台・一站式效率助手</text>
+  </view>
+
+</view>

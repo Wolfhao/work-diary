@@ -1,0 +1,386 @@
+/* 页面整体 */
+.pingyao-container {
+  min-height: 100vh;
+  background-color: #f9f5f0;
+  font-family: -apple-system, 'Microsoft YaHei', sans-serif;
+}
+
+/* 固定导航栏 */
+.nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 88rpx;
+  padding: 0 32rpx;
+  padding-top: var(--status-bar-height, 0rpx);
+  background: #fff;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+  z-index: 100;
+  min-height: calc(88rpx + var(--status-bar-height, 0rpx));
+  box-sizing: border-box;
+}
+
+.nav-back {
+  width: 88rpx;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:active .nav-back-icon {
+    background: rgba(0, 0, 0, 0.06);
+    transform: scale(0.92);
+  }
+}
+
+.nav-placeholder {
+  width: 88rpx;
+}
+
+.nav-back-icon {
+  width: 64rpx;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.nav-back-chevron {
+  width: 20rpx;
+  height: 20rpx;
+  border-top: 4rpx solid #444;
+  border-left: 4rpx solid #444;
+  border-radius: 2rpx;
+  transform: rotate(-45deg) translateX(3rpx);
+}
+
+.nav-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  flex: 1;
+  text-align: center;
+  margin: 0 16rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 内容区补偿固定导航栏 */
+.main-content {
+  padding: calc(88rpx + var(--status-bar-height, 0px) + 32rpx) 32rpx 60rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 32rpx;
+}
+
+/* =====================
+   封面卡片
+   ===================== */
+.cover-card {
+  background: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%);
+  border-radius: 24rpx;
+  padding: 40rpx 40rpx 36rpx;
+  border-top: 6rpx solid #ff4d6d;
+  box-shadow: 0 4rpx 16rpx rgba(255, 77, 109, 0.12);
+}
+
+.cover-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #8a2be2;
+  margin-bottom: 20rpx;
+  line-height: 1.5;
+}
+
+.anniversary-badge {
+  background: #ff4d6d;
+  color: #fff;
+  font-size: 24rpx;
+  font-weight: normal;
+  padding: 4rpx 16rpx;
+  border-radius: 24rpx;
+  margin-left: 12rpx;
+  vertical-align: middle;
+}
+
+.husband-honor {
+  font-size: 26rpx;
+  color: #c9184a;
+  text-align: right;
+  font-style: italic;
+  margin-bottom: 20rpx;
+  padding-right: 8rpx;
+}
+
+.cover-meta-item {
+  font-size: 26rpx;
+  color: #666;
+  margin-top: 10rpx;
+  line-height: 1.6;
+}
+
+/* =====================
+   通用 section 卡片
+   ===================== */
+.section-card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 36rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #cd5c5c;
+  margin-bottom: 24rpx;
+}
+
+.section-text {
+  font-size: 27rpx;
+  color: #555;
+  line-height: 1.8;
+  margin-bottom: 12rpx;
+}
+
+.preface-card {
+  background: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%);
+  border-top: 3rpx solid #ff69b4;
+}
+
+.highlight {
+  color: #c9184a;
+  font-weight: 600;
+}
+
+.preface-end {
+  margin-top: 16rpx;
+  color: #666;
+  font-style: italic;
+}
+
+/* =====================
+   交通卡片
+   ===================== */
+.train-card {
+  background: linear-gradient(135deg, #e6f7ff 0%, #d4ebff 100%);
+  border-left: 6rpx solid #4169e1;
+  border-radius: 0 24rpx 24rpx 0;
+  padding: 36rpx;
+
+  .section-title {
+    color: #2e5fcc;
+  }
+}
+
+.train-item {
+  margin-bottom: 20rpx;
+}
+
+.train-route {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1a3a7c;
+  line-height: 1.6;
+}
+
+.train-seat {
+  font-size: 25rpx;
+  color: #4169e1;
+  margin-top: 6rpx;
+  padding-left: 8rpx;
+}
+
+.train-divider {
+  height: 1rpx;
+  background: rgba(65, 105, 225, 0.2);
+  margin: 16rpx 0;
+}
+
+.train-tip {
+  font-size: 24rpx;
+  color: #555;
+  margin-top: 16rpx;
+  padding: 16rpx;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 12rpx;
+  line-height: 1.6;
+}
+
+/* =====================
+   日程卡片
+   ===================== */
+.day-card {
+  background: #fff8dc;
+  border-radius: 24rpx;
+  padding: 36rpx;
+  border-left: 8rpx solid #daa520;
+  box-shadow: 0 4rpx 16rpx rgba(218, 165, 32, 0.1);
+}
+
+.day-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #cd5c5c;
+  margin-bottom: 28rpx;
+}
+
+/* 天气卡片 */
+.weather-card {
+  display: flex;
+  align-items: flex-start;
+  background: #f8f5f0;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 28rpx;
+}
+
+.weather-icon {
+  font-size: 48rpx;
+  margin-right: 20rpx;
+  min-width: 64rpx;
+  text-align: center;
+  line-height: 1;
+  padding-top: 4rpx;
+}
+
+.weather-content {
+  flex: 1;
+}
+
+.weather-main {
+  font-size: 26rpx;
+  color: #444;
+  font-weight: 500;
+  line-height: 1.6;
+  margin-bottom: 8rpx;
+}
+
+.weather-tip {
+  font-size: 24rpx;
+  color: #888;
+  line-height: 1.6;
+}
+
+/* 时段块 */
+.time-block {
+  margin-bottom: 28rpx;
+  padding-left: 24rpx;
+  border-left: 3rpx solid #c8a97e;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.time-label {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #2e8b57;
+  margin-bottom: 14rpx;
+  line-height: 1.5;
+}
+
+.time-content {
+  font-size: 26rpx;
+  color: #555;
+  line-height: 1.8;
+  margin-bottom: 6rpx;
+}
+
+.attraction {
+  color: #8b0000;
+  font-weight: 600;
+}
+
+.restaurant {
+  color: #ff4500;
+  font-weight: 600;
+}
+
+.time-note {
+  margin-top: 12rpx;
+  padding: 16rpx 20rpx;
+  background: #e6f7ff;
+  border-radius: 10rpx;
+  font-size: 24rpx;
+  color: #555;
+  line-height: 1.7;
+}
+
+/* =====================
+   实用信息卡片
+   ===================== */
+.info-card {
+  .section-title {
+    color: #cd5c5c;
+  }
+}
+
+.info-table {
+  border: 1rpx solid #eee;
+  border-radius: 12rpx;
+  overflow: hidden;
+  margin-bottom: 28rpx;
+}
+
+.info-row {
+  display: flex;
+  border-bottom: 1rpx solid #f0f0f0;
+  align-items: flex-start;
+}
+
+.info-row-last {
+  border-bottom: none;
+}
+
+.info-label {
+  width: 160rpx;
+  min-width: 160rpx;
+  padding: 20rpx 16rpx;
+  font-size: 25rpx;
+  font-weight: 600;
+  color: #555;
+  background: #f5f5f5;
+  line-height: 1.6;
+}
+
+.info-value {
+  flex: 1;
+  padding: 20rpx 20rpx;
+  font-size: 25rpx;
+  color: #666;
+  line-height: 1.7;
+}
+
+.final-note {
+  font-size: 25rpx;
+  color: #888;
+  line-height: 1.7;
+  padding: 16rpx 20rpx;
+  background: #fff0f3;
+  border-radius: 12rpx;
+  border-left: 3rpx solid #ffccd5;
+}
+
+/* =====================
+   地图预览卡片
+   ===================== */
+.map-card {
+  .section-title {
+    color: #8b4513;
+  }
+}
+
+.map-img {
+  width: 100%;
+  border-radius: 12rpx;
+  background-color: #f0ece6;
+}

@@ -1,0 +1,246 @@
+// 年年工作台 - 深色科技感主题
+@bg: #0d1117;
+@card-bg: rgba(255, 255, 255, 0.05);
+@card-border: rgba(255, 255, 255, 0.08);
+@card-radius: 24rpx;
+@text-primary: #f0f6fc;
+@text-secondary: #8b949e;
+@purple-start: #6366f1;
+@purple-end: #8b5cf6;
+@blue-start: #0ea5e9;
+@blue-end: #38bdf8;
+@green-start: #10b981;
+@green-end: #34d399;
+@orange-start: #f59e0b;
+@orange-end: #fbbf24;
+
+page {
+  background: @bg;
+}
+
+/* ===== 根容器 ===== */
+.workspace-container {
+  min-height: 100vh;
+  background: @bg;
+  padding: 40rpx 32rpx 80rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===== 背景装饰 ===== */
+.bg-grid {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    linear-gradient(rgba(99, 102, 241, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.04) 1px, transparent 1px);
+  background-size: 60rpx 60rpx;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-glow {
+  position: fixed;
+  top: -200rpx;
+  right: -200rpx;
+  width: 700rpx;
+  height: 700rpx;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== 内容层（z-index 高于背景）===== */
+.brand-section,
+.grid-container,
+.footer-info {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== 品牌区域 ===== */
+.brand-section {
+  display: flex;
+  align-items: center;
+  padding: 48rpx 8rpx 56rpx;
+}
+
+.brand-icon-wrap {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 24rpx;
+  background: linear-gradient(135deg, @purple-start, @purple-end);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 28rpx;
+  flex-shrink: 0;
+  box-shadow: 0 8rpx 32rpx rgba(99, 102, 241, 0.45);
+}
+
+.brand-icon {
+  font-size: 52rpx;
+  line-height: 1;
+}
+
+.brand-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-size: 44rpx;
+  font-weight: 800;
+  color: @text-primary;
+  letter-spacing: -0.5rpx;
+  margin-bottom: 6rpx;
+}
+
+.brand-subtitle {
+  font-size: 24rpx;
+  color: @text-secondary;
+  letter-spacing: 0.5rpx;
+}
+
+/* ===== 功能卡片网格 ===== */
+.grid-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+/* ===== 单个卡片 ===== */
+.grid-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: @card-bg;
+  border: 1rpx solid @card-border;
+  border-radius: @card-radius;
+  padding: 32rpx 28rpx;
+  backdrop-filter: blur(20rpx);
+  -webkit-backdrop-filter: blur(20rpx);
+  transition: transform 0.15s;
+
+  &:active {
+    transform: scale(0.98);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  &.featured {
+    background: rgba(99, 102, 241, 0.08);
+    border-color: rgba(99, 102, 241, 0.25);
+  }
+
+  &.disabled {
+    opacity: 0.6;
+  }
+}
+
+/* 图标背景 */
+.item-icon-wrap {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 28rpx;
+  flex-shrink: 0;
+
+  &.purple {
+    background: linear-gradient(135deg, @purple-start, @purple-end);
+    box-shadow: 0 6rpx 20rpx rgba(99, 102, 241, 0.35);
+  }
+
+  &.blue {
+    background: linear-gradient(135deg, @blue-start, @blue-end);
+    box-shadow: 0 6rpx 20rpx rgba(14, 165, 233, 0.35);
+  }
+
+  &.green {
+    background: linear-gradient(135deg, @green-start, @green-end);
+    box-shadow: 0 6rpx 20rpx rgba(16, 185, 129, 0.35);
+  }
+
+  &.orange {
+    background: linear-gradient(135deg, @orange-start, @orange-end);
+    box-shadow: 0 6rpx 20rpx rgba(245, 158, 11, 0.35);
+  }
+}
+
+.item-icon {
+  font-size: 44rpx;
+  line-height: 1;
+}
+
+/* 文字信息 */
+.item-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.item-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: @text-primary;
+  margin-bottom: 6rpx;
+}
+
+.item-desc {
+  font-size: 24rpx;
+  color: @text-secondary;
+}
+
+/* 箭头 */
+.item-arrow {
+  font-size: 40rpx;
+  color: @text-secondary;
+  margin-left: 16rpx;
+  opacity: 0.5;
+}
+
+/* 待处理 Badge */
+.pending-badge {
+  position: absolute;
+  top: 20rpx;
+  right: 60rpx;
+  min-width: 40rpx;
+  height: 40rpx;
+  padding: 0 10rpx;
+  background: #ef4444;
+  color: #fff;
+  font-size: 20rpx;
+  font-weight: 700;
+  border-radius: 20rpx;
+  line-height: 40rpx;
+  text-align: center;
+  box-shadow: 0 4rpx 12rpx rgba(239, 68, 68, 0.50);
+}
+
+/* Coming Soon 标签 */
+.coming-tag {
+  background: rgba(255, 255, 255, 0.08);
+  color: @text-secondary;
+  font-size: 18rpx;
+  font-weight: 600;
+  padding: 4rpx 16rpx;
+  border-radius: 12rpx;
+  border: 1rpx solid rgba(255, 255, 255, 0.12);
+  letter-spacing: 1rpx;
+  margin-left: 16rpx;
+}
+
+/* ===== 底部版本信息 ===== */
+.footer-info {
+  margin-top: 64rpx;
+  text-align: center;
+}
+
+.footer-text {
+  font-size: 22rpx;
+  color: rgba(139, 148, 158, 0.50);
+  letter-spacing: 1rpx;
+}

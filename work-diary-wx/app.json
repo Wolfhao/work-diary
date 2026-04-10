@@ -1,25 +1,26 @@
 {
   "pages": [
-    "pages/home/index",
-    "pages/order/index",
-    "pages/my/index"
+    "pages/index/index"
   ],
   "usingComponents": {
     "t-toast": "tdesign-miniprogram/toast/toast"
   },
   "subpackages": [
     {
-      "root": "pages/login",
-      "name": "login",
+      "root": "modules/workorder",
+      "name": "workorder",
       "pages": [
-        "login"
+        "index",
+        "dashboard/index",
+        "release/index"
       ]
     },
     {
-      "root": "pages/release",
-      "name": "release",
+      "root": "modules/travel",
+      "name": "travel",
       "pages": [
-        "index"
+        "index",
+        "pingyao/index"
       ]
     }
   ],
@@ -28,23 +29,6 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "工作日记",
     "navigationBarTextStyle": "black"
-  },
-  "tabBar": {
-    "custom": true,
-    "list": [
-      {
-        "pagePath": "pages/home/index",
-        "text": "看板"
-      },
-      {
-        "pagePath": "pages/order/index",
-        "text": "商单"
-      },
-      {
-        "pagePath": "pages/my/index",
-        "text": "我的"
-      }
-    ]
   },
   "resolveAlias": {
     "~/*": "/*"

@@ -1,0 +1,7 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "dashboard-container": "/components/workorder-dashboard/index",
+    "order-container": "/components/workorder-order/index"
+  }
+}

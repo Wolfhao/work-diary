@@ -1,0 +1,71 @@
+.travel-container {
+  min-height: 100vh;
+  background-color: #f5f7fa;
+  padding: 0 32rpx;
+}
+
+.nav-bar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 88rpx;
+  padding: 0 32rpx;
+  padding-top: var(--status-bar-height, 0rpx);
+  background: #fff;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+  z-index: 100;
+  margin: 0 -32rpx 32rpx;
+}
+
+.nav-back, .nav-placeholder {
+  width: 88rpx;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-back-icon {
+  font-size: 40rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+.nav-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32rpx;
+}
+
+.guide-card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 48rpx 32rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+  text-align: center;
+}
+
+.guide-cover {
+  font-size: 64rpx;
+  margin-bottom: 16rpx;
+}
+
+.guide-city {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.guide-title {
+  font-size: 24rpx;
+  color: #999;
+}

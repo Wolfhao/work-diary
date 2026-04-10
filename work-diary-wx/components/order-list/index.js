@@ -1,7 +1,8 @@
 // 将 ISO 时间字符串格式化为 "3月06日 13:49"
 function formatTime(isoStr) {
     if (!isoStr) return '';
-    const str = String(isoStr).replace('T', ' ');
+    // 兼容 iOS：将 "yyyy-MM-dd HH:mm:ss" 或 "yyyy-MM-ddTHH:mm:ss" 统一转为 "yyyy/MM/dd HH:mm:ss"
+    const str = String(isoStr).replace('T', ' ').replace(/-/g, '/');
     const d = new Date(str);
     if (isNaN(d.getTime())) return isoStr;
     const month = d.getMonth() + 1;
@@ -50,7 +51,7 @@ Component({
             const id = e.currentTarget.dataset.id;
             // TODO: 跳转到详情页
             wx.navigateTo({
-                url: `/pages/release/index?id=${id}`
+                url: `/modules/workorder/release/index?id=${id}&mode=view`
             });
         }
     }

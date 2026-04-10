@@ -1,0 +1,61 @@
+<view class="release-page {{isViewMode ? 'view-mode' : ''}}">
+
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <text class="page-title">{{isViewMode ? '📋 商单详情' : (isEdit ? '✏️ 编辑商单' : '📝 新建商单')}}</text>
+    <text class="page-subtitle">{{isViewMode ? '查看商单完整信息' : (isEdit ? '修改你的商单信息' : '记录你的接单信息')}}</text>
+  </view>
+
+  <!-- 基础信息 -->
+  <view class="form-card">
+    <view class="section-label">基础信息</view>
+    <view class="form-item">
+      <text class="form-label">商单名称</text>
+      <t-input placeholder="请输入合作项目名称" borderless value="{{formData.title}}" bind:change="onTitleChange" t-class="input-class" disabled="{{isViewMode}}" />
+    </view>
+    <view class="form-divider"></view>
+    <view class="form-item">
+      <text class="form-label">合作平台</text>
+      <t-input placeholder="例: 小红书 / 抖音" borderless value="{{formData.platform}}" bind:change="onPlatformChange" t-class="input-class" disabled="{{isViewMode}}" />
+    </view>
+  </view>
+
+  <!-- 资金信息 -->
+  <view class="form-card">
+    <view class="section-label">资金信息</view>
+    <view class="form-item">
+      <text class="form-label">垫付金额</text>
+      <t-input placeholder="0.00" type="digit" borderless value="{{formData.advanceAmount}}" bind:change="onAdvanceChange" t-class="input-class" disabled="{{isViewMode}}" />
+    </view>
+    <view class="form-divider"></view>
+    <view class="form-item">
+      <text class="form-label">预计收入</text>
+      <t-input placeholder="0.00" type="digit" borderless value="{{formData.incomeAmount}}" bind:change="onIncomeChange" t-class="input-class" disabled="{{isViewMode}}" />
+    </view>
+  </view>
+
+  <!-- 备注描述 -->
+  <view class="form-card">
+    <view class="section-label">备注描述</view>
+    <t-textarea placeholder="请填写商单要求或任何备忘记录..." value="{{formData.description}}" disableDefaultPadding="{{true}}" bind:change="onDescChange" t-class="textarea-class" disabled="{{isViewMode}}" />
+  </view>
+
+  <!-- 图片上传 -->
+  <view class="form-card">
+    <view class="section-label">相关截图凭证</view>
+    <image-uploader fileList="{{fileList}}" max="5" disabled="{{isViewMode}}" bind:change="onFileListChange" />
+  </view>
+
+  <!-- 底部操作 -->
+  <view class="action-area">
+    <block wx:if="{{isViewMode}}">
+      <t-button theme="primary" size="large" block bindtap="onEditTap">编辑商单</t-button>
+    </block>
+    <block wx:else>
+      <t-button theme="primary" size="large" block bindtap="onSubmit" loading="{{submitting}}">保存提交</t-button>
+      <t-button wx:if="{{isEdit}}" theme="danger" variant="outline" size="large" block bindtap="onDelete" style="margin-top: 20rpx">删除此商单</t-button>
+    </block>
+  </view>
+
+  <t-toast id="t-toast" />
+</view>
