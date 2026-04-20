@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableTransactionManagement
-@MapperScan("com.workdiary.mapper")
+@MapperScan("com.workdiary.module.*.mapper")
 public class WorkDiaryApplication {
 
     public static void main(String[] args) {
