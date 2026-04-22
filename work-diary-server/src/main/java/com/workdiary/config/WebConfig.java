@@ -21,7 +21,7 @@ public class WebConfig implements WebMvcConfigurer {
             SaRouter
                     .match("/**") // 拦截的 path 列表，可以写多个
                     .notMatch("/login", "/wx/login",
-                            "/file/download",
+                            "/file/download", "/file/imageView",
                             "/swagger-ui/**", "/v3/api-docs/**", "/doc.html", "/webjars/**") // 排除掉的
                                                                                                                       // path
                                                                                                                       // 列表
