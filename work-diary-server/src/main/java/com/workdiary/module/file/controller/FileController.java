@@ -19,6 +19,8 @@ import org.springframework.web.servlet.HandlerMapping;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
@@ -90,7 +92,18 @@ public class FileController {
 
         // 1. 自动获取 /images/ 后面的完整路径（包含所有 /）
         String fullPath = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
-        String key = fullPath.replaceFirst("/imageView/", "");
+        String encodedKey = fullPath.replaceFirst("/file/imageView/", "");
+
+        String key = null;
+        try {
+            key = URLDecoder.decode(encodedKey, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            log.error("图片预览失败: key={}", key, e);
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return;
+        }
+
+        log.info("最终文件key = {}", key); // 你会看到正确中文了！
 
         if (key == null || key.isEmpty()) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
