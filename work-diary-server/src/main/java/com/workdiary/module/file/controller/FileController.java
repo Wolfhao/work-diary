@@ -6,12 +6,15 @@ import com.workdiary.infrastructure.storage.FileStorageStrategy;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.HandlerMapping;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -72,6 +75,63 @@ public class FileController {
             out.flush();
         } catch (IOException e) {
             log.error("文件代理下载写入响应失败: key={}", key, e);
+        }
+    }
+
+
+    /**
+     * 飞书MD专用：万能路径图片预览
+     * 格式：https://suntool.online/imageView/xxx/xxx/xxx.png
+     * 任意层级 / 都支持
+     */
+    @Operation(summary = "万能路径图片预览（飞书MD专用）", description = "任意路径 /imageView/xxx/xxx.png 直接预览，支持无限层级目录")
+    @GetMapping("/imageView/**")
+    public void image(HttpServletRequest request, HttpServletResponse response) {
+
+        // 1. 自动获取 /images/ 后面的完整路径（包含所有 /）
+        String fullPath = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+        String key = fullPath.replaceFirst("/imageView/", "");
+
+        if (key == null || key.isEmpty()) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
+
+        // 2. 完全沿用你现有的下载逻辑
+        FileStorageStrategy.DownloadResult result = fileStorageFactory.getStrategy().download(key);
+
+        // 3. 强制设置为图片类型（飞书必须）
+        String contentType = result.getContentType();
+        if (!contentType.startsWith("image/")) {
+            // 如果不是图片，自动覆盖成 image/png（保证飞书能识别）
+            contentType = "image/png";
+        }
+        response.setContentType(contentType);
+
+        // 4. 长度
+        if (result.getContentLength() > 0) {
+            response.setContentLengthLong(result.getContentLength());
+        }
+
+        // 5. inline 预览模式（飞书必须）
+        String encodedFilename = URLEncoder.encode(result.getFilename(), StandardCharsets.UTF_8)
+                .replace("+", "%20");
+        response.setHeader("Content-Disposition", "inline; filename*=UTF-8''" + encodedFilename);
+
+        // 6. 流写入（和你原来完全一样）
+        try (InputStream in = result.getInputStream();
+             ServletOutputStream out = response.getOutputStream()) {
+
+            byte[] buffer = new byte[8192];
+            int len;
+            while ((len = in.read(buffer)) != -1) {
+                out.write(buffer, 0, len);
+            }
+            out.flush();
+
+        } catch (Exception e) {
+            log.error("图片预览失败: key={}", key, e);
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
 }
